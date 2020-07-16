@@ -12,20 +12,4 @@ RSpec.describe PowerGenerator, type: :model do
       expect(power_generator.errors).to be_empty
     end
   end
-
-  context "methods with valid attributes" do
-    it "method with a collection of string attributes" do
-      expect(PowerGenerator::string_attributes.count).to eql(4)
-    end
-
-    it "method with a collection of float attributes" do
-      expect(PowerGenerator::float_attributes.count).to eql(6)
-    end
-
-    it "method with a collection of integer attributes" do
-      expect(PowerGenerator::integer_attributes.count).to eql(1)
-    end
-    
-  end
-  
 end
