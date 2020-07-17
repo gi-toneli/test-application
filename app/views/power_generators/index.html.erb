@@ -65,7 +65,7 @@
         })%>
       </div>
       <div class="form-item">
-          <button type="submit" class="btn btn-outline-primary btn-lg">Pesquisar</button>
+        <button type="submit" class="btn btn-outline-primary btn-lg">Pesquisar</button>
       </div>
     <%end%>
   </div>
@@ -78,8 +78,11 @@
           <h2><%= power_generator.name.upcase %></h2>
           <p class="power_generator-card__price"><%= number_to_currency(power_generator.price, unit: "R$ ", precision: 2, :separator => ",", :delimiter => ".") %></p>
           <p><strong>Descrição: </strong><%= power_generator.description %></p>
-          <p><strong>Calcular frete? (digite no campo)</strong></p>
-          <p><%= text_field_tag "cep_origin_#{power_generator.id}", '', type: 'number', placeholder: 'Digite seu cep' %> <%=button_tag 'Calcular' %></p>
+          <p><strong>Calcular frete. Digite o seu CEP</strong></p>
+          <p>
+            <%= text_field_tag "cep_origin_#{power_generator.id}", '', type: 'number' %>
+            <%= button_tag 'Calcular' %>
+          </p>
           <div id="<%= "destination_value_#{power_generator.id}" %>"></div>
         </div>
       </div>
