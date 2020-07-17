@@ -28,13 +28,6 @@ function ready(event) {
       $('.advanced-form').show();
     }
   });
-
-  // const form_to_be_active = $('#is_visible').value();
-  // if (form_to_be_active === 'simple-form'){
-  //   $('#simpleSearch').click();
-  // }else{
-  //   $('#advancedSearch').click();
-  // }
 }
 
 $(document).on('turbolinks:load', ready);

@@ -8,7 +8,7 @@
     <div class="searcher__radio">
       <div class="form-check">
         <input class="form-check-input" type="radio" name="searchRadio" id="simpleSearch" value="simple"
-        <%= (((params[:is_visible] == 'simple-form') || (params[:is_visible].empty?) )  ) ? 'checked' : ''  %>>
+        <%= (((params[:is_visible] == 'simple-form') || (params[:is_visible].nil?) )  ) ? 'checked' : ''  %>>
         <label class="form-check-label" for="simpleSearch">Pesquisa simples</label>
       </div>
       <div class="form-check">
@@ -16,10 +16,9 @@
         <label class="form-check-label" for="advancedSearch">Pesquisa Avançada</label>
       </div>
     </div>
-
     <%= search_form_for @q do |f| %>
       <%=hidden_field_tag :is_visible, 'simple-form'%>
-      <div class="simple-form" styled="<%= (((params[:is_visible] == 'simple-form') || (params[:is_visible].empty?) )  ) ? '' : 'display:none'  %>">
+      <div class="simple-form" style="<%= (((params[:is_visible] == 'simple-form') || (params[:is_visible].nil?) )  ) ? '' : 'display:none'  %>">
         <div class="simple-form__input">
           <%= f.search_field :name_or_description_cont, class: 'form-control form-control-lg', placeholder: 'o que procura?' %>
         </div>
@@ -38,9 +37,12 @@
       <%=f.label :width_lteq, 'Filtrar por Largura max(100)' %> <%=f.search_field :width_lteq, type: :number, max: 100, min: 0 %><br />
       <%=f.label :height_lteq, 'Filtrar por Altura max(40)' %> <%=f.search_field :height_lteq, type: :number, max: 40, min: 0 %><br />
       <%=f.label :lenght_lteq, 'Filtrar por Comprimento max(200)' %> <%=f.search_field :lenght_lteq, type: :number, max: 200, min: 0 %><br />
-      <%=f.label :weight_lteq, 'Filtrar por Peso max(3000)' %> <%=f.search_field :lenght_lteq, type: :number, max: 200, min: 0 %><br />
+      <%=f.label :weight_lteq, 'Filtrar por Peso max(3000)' %> <%=f.search_field :weight_lteq, type: :number, max: 3000, min: 0 %><br />
       <%=f.label :price_lteq, 'Filtrar por Preço' %> <%=f.search_field :price_lteq, type: :number %><br />
-      <br />
+      <%=f.label :structure_type_eq, 'Filtrar por Estrutura' %> <%=f.select :structure_type_eq, grouped_options_for_select({
+        'Ignorar' => ['Ignorar Estrutura'],
+        'Tipo de Estrutura' =>PowerGenerator.structure_types
+      })%>
       <button type="submit" class="btn btn-outline-primary btn-lg">Pesquisar</button>
     <% end %>
   </div>
