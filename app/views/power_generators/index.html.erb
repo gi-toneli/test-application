@@ -80,7 +80,7 @@
           <p><strong>Descrição: </strong><%= power_generator.description %></p>
           <p><strong>Calcular frete. Digite o seu CEP</strong></p>
           <p>
-            <%= text_field_tag "cep_origin_#{power_generator.id}", '', type: 'number' %>
+            <%= text_field_tag "cep_origin_#{power_generator.id}", '', class: 'cep' %>
             <%= button_tag 'Calcular' %>
           </p>
           <div id="<%= "destination_value_#{power_generator.id}" %>"></div>
