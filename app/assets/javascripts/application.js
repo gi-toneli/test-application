@@ -10,9 +10,11 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery3
 //= require rails-ujs
 //= require turbolinks
+//= require popper
+//= require bootstrap-sprockets
 //= require_tree .
 
 function ready(event) {
@@ -26,6 +28,13 @@ function ready(event) {
       $('.advanced-form').show();
     }
   });
+
+  // const form_to_be_active = $('#is_visible').value();
+  // if (form_to_be_active === 'simple-form'){
+  //   $('#simpleSearch').click();
+  // }else{
+  //   $('#advancedSearch').click();
+  // }
 }
 
 $(document).on('turbolinks:load', ready);
