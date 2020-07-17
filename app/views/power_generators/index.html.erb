@@ -29,23 +29,47 @@
     <% end %>
   </div>
   <div class="advanced-form" style="<%= params[:is_visible] == 'advanced-form' ? '' : 'display:none'  %> ">
-    Entradas do usuário para pesquisar uma coleção de geradores de energia com base nas recomendações fornecidas e melhor custo de frete.
-    <%= search_form_for @q do |f| %>
+    <h3>Pesquisa Avançada</h3>
+    <%=search_form_for @q do |f|%>
+    <input name="utf8" type="hidden" value="✓">
       <%=hidden_field_tag :is_visible, 'advanced-form'%>
-      <%=f.label :name_or_description_or_manufacturer_cont, 'Filtrar por Nome/Descrição/Fabricante' %>
-      <%=f.search_field :name_or_description_or_manufacturer_cont %><br />
-      <%=f.label :width_lteq, 'Filtrar por Largura max(100)' %> <%=f.search_field :width_lteq, type: :number, max: 100, min: 0 %><br />
-      <%=f.label :height_lteq, 'Filtrar por Altura max(40)' %> <%=f.search_field :height_lteq, type: :number, max: 40, min: 0 %><br />
-      <%=f.label :lenght_lteq, 'Filtrar por Comprimento max(200)' %> <%=f.search_field :lenght_lteq, type: :number, max: 200, min: 0 %><br />
-      <%=f.label :weight_lteq, 'Filtrar por Peso max(3000)' %> <%=f.search_field :weight_lteq, type: :number, max: 3000, min: 0 %><br />
-      <%=f.label :price_lteq, 'Filtrar por Preço' %> <%=f.search_field :price_lteq, type: :number %><br />
-      <%=f.label :structure_type_eq, 'Filtrar por Estrutura' %> <%=f.select :structure_type_eq, grouped_options_for_select({
-        'Ignorar' => ['Ignorar Estrutura'],
-        'Tipo de Estrutura' =>PowerGenerator.structure_types
-      })%>
-      <button type="submit" class="btn btn-outline-primary btn-lg">Pesquisar</button>
-    <% end %>
+      <div class="form-item">
+        <%=f.label :name_or_description_or_manufacturer_cont, 'Palavra-chave' %>
+        <%=f.search_field :name_or_description_or_manufacturer_cont, class: "", "data-com.bitwarden.browser.user-edited": "yes" %>
+      </div>
+      <div class="form-item">
+          <%=f.label :width_lteq, 'Largura - max(100)' %>
+          <%=f.search_field :width_lteq, type: :number, max: 100, min: 0 %>
+      </div>
+      <div class="form-item">
+        <%=f.label :height_lteq, 'Altura - max(40)' %>
+        <%=f.search_field :height_lteq, type: :number, max: 40, min: 0 %>
+      </div>
+      <div class="form-item">
+        <%=f.label :lenght_lteq, 'Comprimento - max(200)' %>
+        <%=f.search_field :lenght_lteq, type: :number, max: 200, min: 0 %>
+      </div>
+      <div class="form-item">
+        <%=f.label :weight_lteq, 'Peso - max(3000)' %>
+        <%=f.search_field :weight_lteq, type: :number, max: 3000, min: 0 %>
+      </div>
+      <div class="form-item">
+        <%=f.label :price_lteq, 'Preço' %>
+        <%=f.search_field :price_lteq, type: :number %>
+      </div>
+      <div class="form-item">
+        <%=f.label :structure_type_eq, 'Estrutura' %>
+        <%=f.select :structure_type_eq, grouped_options_for_select({
+          'Ignorar' => ['Ignorar Estrutura'],
+          'Tipo de Estrutura' =>PowerGenerator.structure_types
+        })%>
+      </div>
+      <div class="form-item">
+          <button type="submit" class="btn btn-outline-primary btn-lg">Pesquisar</button>
+      </div>
+    <%end%>
   </div>
+  
   <div class="container" >
     <% @power_generators.each do |power_generator| %>
       <div class="box card power_generator-card">
@@ -54,6 +78,9 @@
           <h2><%= power_generator.name.upcase %></h2>
           <p class="power_generator-card__price"><%= number_to_currency(power_generator.price, unit: "R$ ", precision: 2, :separator => ",", :delimiter => ".") %></p>
           <p><strong>Descrição: </strong><%= power_generator.description %></p>
+          <p><strong>Calcular frete? (digite no campo)</strong></p>
+          <p><%= text_field_tag "cep_origin_#{power_generator.id}", '', type: 'number', placeholder: 'Digite seu cep' %> <%=button_tag 'Calcular' %></p>
+          <div id="<%= "destination_value_#{power_generator.id}" %>"></div>
         </div>
       </div>
     <% end %>
