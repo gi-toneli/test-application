@@ -62,7 +62,7 @@
         <%=f.select :structure_type_eq, grouped_options_for_select({
           'Ignorar' => ['Ignorar Estrutura'],
           'Tipo de Estrutura' =>PowerGenerator.structure_types
-        })%>
+        }, params[:q] && params[:q][:structure_type_eq].to_i)%>
       </div>
       <div class="form-item">
         <button type="submit" class="btn btn-outline-primary btn-lg">Pesquisar</button>
