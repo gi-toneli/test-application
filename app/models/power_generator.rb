@@ -13,4 +13,16 @@ class PowerGenerator < ApplicationRecord
     solo
     trapezoidal
   ]
+
+  attr_accessor :destination, :freight
+
+  def calc_freight
+    self.freight = Correios::Frete::Calculador.new(:cep_origem => "04602-002",
+            :cep_destino => '35300-187',
+            :peso => self.length,
+            :comprimento => self.lenght,
+            :largura => self.width,
+            :altura => self.height)
+    self.freight.calcular_pac_gf
+  end
 end

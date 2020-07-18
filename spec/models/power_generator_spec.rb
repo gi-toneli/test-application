@@ -7,7 +7,7 @@ RSpec.describe PowerGenerator, type: :model do
     end
 
     it "should be valid an instance of subject" do
-      power_generator = build(:power_generator)
+      power_generator = build(:power_generator, :FRONIUS)
       expect(power_generator.valid?).to eql(true) 
       expect(power_generator.errors).to be_empty
     end
