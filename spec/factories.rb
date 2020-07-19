@@ -10,7 +10,7 @@ FactoryBot.define do
                         Eficiência do módulo 17% 
                         Temperatura operacional -40 °C ~ +85°C
                         Tensão máxima do sistema 1.500V 
-                        Classificação máxima de fusíveis da série 15 A' }
+                        Classificação máxima de fusíveis da série 15 A Portal Solar Test' }
       image_url       { 'https://marketplace-img-production.s3.amazonaws.com/products/105434/large/20190806-1-1dlw3m7.?1565111320' }
       manufacturer    { 'BYD' }
       price           { 86176.70 }

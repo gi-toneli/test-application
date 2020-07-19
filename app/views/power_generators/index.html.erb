@@ -23,7 +23,7 @@
           <%= f.search_field :name_or_description_cont, class: 'form-control form-control-lg', placeholder: 'o que procura?' %>
         </div>
         <div class="simple-form__btn">
-          <button type="submit" class="btn btn-outline-primary btn-lg">Pesquisar</button>
+          <button type="submit" class="btn btn-outline-primary btn-lg" id="simple-form-submit">Pesquisar</button>
         </div>
       </div>
     <% end %>
@@ -60,12 +60,12 @@
       <div class="form-item">
         <%=f.label :structure_type_eq, 'Estrutura' %>
         <%=f.select :structure_type_eq, grouped_options_for_select({
-          'Ignorar' => ['Ignorar Estrutura'],
+          'Ignorar' => {'Ignorar Estrutura' => ""} ,
           'Tipo de Estrutura' =>PowerGenerator.structure_types
-        }, params[:q] && params[:q][:structure_type_eq].to_i)%>
+        }, params[:q] && params[:q][:structure_type_eq] && !params[:q][:structure_type_eq].empty? && params[:q][:structure_type_eq].to_i)%>
       </div>
       <div class="form-item">
-        <button type="submit" class="btn btn-outline-primary btn-lg">Pesquisar</button>
+        <button type="submit" class="btn btn-outline-primary btn-lg" id="advanced-form-submit">Pesquisar</button>
       </div>
     <%end%>
   </div>
